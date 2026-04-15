@@ -1,6 +1,14 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<!-- Google tag (gtag.js) -->
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-W1MZLDE3NQ"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'G-W1MZLDE3NQ');
+</script>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>Case Study · People Growth Ecosystem for a Digital Agency</title>
@@ -979,35 +987,12 @@
     el.style.transitionDelay = `${Math.min(i * 60, 400)}ms`;
     observer.observe(el);
   });
-
-  // PDF Download
-  document.getElementById('downloadPdf').addEventListener('click', function() {
-    const btn = this;
-    btn.textContent = 'Generating...';
-    btn.disabled = true;
-
-    // Make all reveals visible
-    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
-
-    // Hide button and footer for PDF
-    btn.style.display = 'none';
-    const footer = document.querySelector('footer');
-    if (footer) footer.style.display = 'none';
-
-    const opt = {
-      margin:       [8, 12, 8, 12],
-      filename:     'Polar-Bear-Case-Study.pdf',
-      image:        { type: 'jpeg', quality: 0.95 },
-      html2canvas:  { scale: 2, useCORS: true, logging: false },
-      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' },
-      pagebreak:    { mode: ['css'], before: '.hub' }
-    };
-
-    html2pdf().set(opt).from(document.body).save().then(() => {
-      btn.textContent = 'Download PDF';
-      btn.disabled = false;
-      btn.style.display = '';
-      if (footer) footer.style.display = '';
+  // Track CTA click
+  document.querySelector('.cta').addEventListener('click', function() {
+    gtag('event', 'cta_click', {
+      event_category: 'engagement',
+      event_label: 'lets_have_a_conversation',
+      transport_type: 'beacon'
     });
   });
 </script>
