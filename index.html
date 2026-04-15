@@ -56,15 +56,17 @@
     padding: 28px 0;
     position: sticky;
     top: 0;
-    background: rgba(255, 255, 255, 0.45);
-    backdrop-filter: blur(20px) saturate(1.2);
-    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    background: rgba(255, 255, 255, 0.25);
+    backdrop-filter: blur(40px) saturate(1.4);
+    -webkit-backdrop-filter: blur(40px) saturate(1.4);
     z-index: 100;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.35);
+    border-top: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 1px 8px rgba(0, 0, 0, 0.04);
     transition: border-color 0.3s ease, background 0.3s ease;
   }
   nav.scrolled {
-    background: rgba(255, 255, 255, 0.65);
+    background: rgba(255, 255, 255, 0.45);
     border-bottom-color: rgba(0, 0, 0, 0.06);
   }
   nav .container { display: flex; justify-content: space-between; align-items: center; }
@@ -935,7 +937,14 @@
         </div>
       </div>
 
-      <h2 class="reveal" style="margin-top:56px;">Key <em>outcomes</em></h2>
+      <div class="hub-intro" style="margin-top:56px;margin-bottom:28px;">
+        <div class="reveal">
+          <h2 style="margin-bottom:0;">Key <em>outcomes</em></h2>
+        </div>
+        <div class="hub-intro-right reveal">
+          <p>After the first cycle, leadership had structured data on every person for the first time — and team members felt heard, not evaluated.</p>
+        </div>
+      </div>
 
       <div class="outcomes-grid">
         <div class="outcome-card reveal">
@@ -1066,7 +1075,14 @@
 <section class="screenshots">
   <div class="container">
 
-    <h2 class="reveal">What it looks like <em>in practice.</em></h2>
+    <div class="hub-intro" style="margin-bottom:28px;">
+      <div class="reveal">
+        <h2 style="margin-bottom:0;">What it looks like <em>in practice.</em></h2>
+      </div>
+      <div class="hub-intro-right reveal">
+        <p>Real screens from the platform we built. Everything is custom-designed for how the team actually works — nothing off-the-shelf.</p>
+      </div>
+    </div>
 
     <div class="screenshot-grid">
       <div class="screenshot-card reveal">
