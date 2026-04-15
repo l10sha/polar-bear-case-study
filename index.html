@@ -721,6 +721,115 @@
     footer { display: none !important; }
     .section-label { margin-bottom: 10px !important; }
   }
+
+  /* ------ ABOUT MODAL ------ */
+  .modal-overlay {
+    position: fixed; inset: 0; z-index: 9999;
+    background: rgba(26, 26, 46, 0.55);
+    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
+    display: flex; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none;
+    transition: opacity 0.35s ease;
+    padding: 40px;
+  }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-card {
+    background: white;
+    border-radius: 20px;
+    max-width: 920px; width: 100%;
+    max-height: 85vh; overflow-y: auto;
+    padding: 56px 52px;
+    box-shadow: 0 32px 80px rgba(0,0,0,0.25);
+    transform: translateY(24px);
+    transition: transform 0.4s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .modal-overlay.open .modal-card { transform: translateY(0); }
+  .modal-close {
+    position: absolute; top: 20px; right: 24px;
+    background: none; border: none; font-size: 28px;
+    color: var(--muted); cursor: pointer;
+    width: 40px; height: 40px;
+    display: flex; align-items: center; justify-content: center;
+    border-radius: 50%; transition: background 0.2s;
+  }
+  .modal-close:hover { background: var(--line); }
+  .modal-card h2 {
+    font-family: 'Fraunces', serif; font-size: 32px;
+    font-weight: 500; letter-spacing: -0.02em;
+    margin-bottom: 6px;
+  }
+  .modal-subtitle {
+    font-size: 15px; color: var(--muted); line-height: 1.5;
+    margin-bottom: 28px; max-width: 680px;
+  }
+  .modal-body p {
+    font-size: 15px; line-height: 1.65; color: var(--ink-soft);
+    margin-bottom: 16px; max-width: 720px;
+  }
+  .modal-divider {
+    height: 1px; background: var(--line);
+    margin: 32px 0;
+  }
+  .modal-section-title {
+    font-family: 'Fraunces', serif; font-size: 22px;
+    font-weight: 500; letter-spacing: -0.015em;
+    margin-bottom: 20px;
+  }
+  .modal-grid {
+    display: grid; grid-template-columns: repeat(3, 1fr);
+    gap: 16px; margin-bottom: 8px;
+  }
+  .modal-grid-item {
+    padding: 20px;
+    background: var(--bg);
+    border-radius: 12px;
+    border: 1px solid var(--line);
+  }
+  .modal-grid-item strong {
+    font-family: 'Fraunces', serif; font-size: 15px;
+    font-weight: 500; display: block; margin-bottom: 4px;
+    color: var(--ink);
+  }
+  .modal-grid-item span {
+    font-size: 13px; color: var(--muted); line-height: 1.4;
+  }
+  .modal-founders {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 24px;
+  }
+  .modal-founder {
+    padding: 24px;
+    background: var(--bg);
+    border-radius: 14px;
+    border: 1px solid var(--line);
+  }
+  .modal-founder h4 {
+    font-family: 'Fraunces', serif; font-size: 18px;
+    font-weight: 500; margin-bottom: 2px;
+  }
+  .modal-founder .role {
+    font-size: 13px; color: var(--accent); font-weight: 500;
+    margin-bottom: 12px;
+  }
+  .modal-founder p {
+    font-size: 13px !important; line-height: 1.55 !important;
+    color: var(--ink-soft); margin-bottom: 12px !important;
+  }
+  .modal-founder a {
+    font-size: 13px; font-weight: 600; color: var(--ink);
+    text-decoration: none; border-bottom: 1px solid var(--line);
+    padding-bottom: 1px; transition: border-color 0.2s;
+  }
+  .modal-founder a:hover { border-color: var(--accent); }
+  .nav-about {
+    font-family: 'Inter', sans-serif; font-size: 14px;
+    font-weight: 500; color: var(--ink-soft);
+    background: none; border: none; cursor: pointer;
+    padding: 6px 16px; border-radius: 100px;
+    transition: background 0.2s, color 0.2s;
+    letter-spacing: -0.01em;
+  }
+  .nav-about:hover { background: rgba(0,0,0,0.05); color: var(--ink); }
 </style>
 </head>
 <body>
@@ -730,8 +839,49 @@
     <div class="brand">
       A case study by <strong>Polar Bear</strong>
     </div>
+    <button class="nav-about" id="openAbout">About Polar Bear</button>
   </div>
 </nav>
+
+<!-- About Modal -->
+<div class="modal-overlay" id="aboutModal">
+  <div class="modal-card">
+    <button class="modal-close" id="closeModal">×</button>
+    <h2>About Polar Bear</h2>
+    <p class="modal-subtitle">People Ops Systems for design studios, creative agencies, digital boutiques, product teams, and consulting boutiques.</p>
+    <div class="modal-body">
+      <p>Polar Bear was founded by Pauline Bertry and Alexey Lobachev — both ex-McKinsey colleagues who made the jump from big corporate into the agency world and never looked back.</p>
+      <p>After spending years inside one of the most rigorous people-development machines on the planet, they saw the same question everywhere they went: <em>"How do we build a team that actually sticks around and grows with us?"</em></p>
+      <p>We don't just advise — we build. We run the first cycles with you and train the team along the way. You own it when we're done. We design for real life, automate what we can, and start small on purpose — pilots first, so your team builds confidence before it builds habits.</p>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="modal-section-title">What we build</div>
+    <div class="modal-grid">
+      <div class="modal-grid-item"><strong>Career paths</strong><span>that don't confuse people</span></div>
+      <div class="modal-grid-item"><strong>Review cycles</strong><span>that help people grow</span></div>
+      <div class="modal-grid-item"><strong>Handbooks</strong><span>that answer real questions</span></div>
+      <div class="modal-grid-item"><strong>Workshops</strong><span>that build real capability</span></div>
+      <div class="modal-grid-item"><strong>Onboarding design</strong><span>that makes first weeks count</span></div>
+      <div class="modal-grid-item"><strong>Engagement surveys</strong><span>that people are happy to fill in</span></div>
+    </div>
+    <div class="modal-divider"></div>
+    <div class="modal-section-title">Founders</div>
+    <div class="modal-founders">
+      <div class="modal-founder">
+        <h4>Pauline Bertry</h4>
+        <div class="role">Product Growth & CX Design</div>
+        <p>10+ years leading product & design teams. Built from scratch and led Design Hubs at McKinsey Moscow and Budapest. Created career frameworks and growth systems tested with 100+ person cross-functional product teams.</p>
+        <a href="https://www.linkedin.com/in/paulinebertry/" target="_blank">LinkedIn →</a>
+      </div>
+      <div class="modal-founder">
+        <h4>Alexey Lobachev</h4>
+        <div class="role">People Strategy & Employee Engagement</div>
+        <p>15+ years inside top professional services organisations. At McKinsey led Employee Engagement and Talent Management programmes, including competencies review, region-wide DEI transformation, and Top Talent Retention Program.</p>
+        <a href="https://www.linkedin.com/in/leshalobachev/" target="_blank">LinkedIn →</a>
+      </div>
+    </div>
+  </div>
+</div>
 
 <section class="hero">
   <div class="container">
@@ -995,6 +1145,29 @@
       event_label: 'lets_have_a_conversation',
       transport_type: 'beacon'
     });
+  });
+
+  // About Modal
+  const modal = document.getElementById('aboutModal');
+  document.getElementById('openAbout').addEventListener('click', () => {
+    modal.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  });
+  document.getElementById('closeModal').addEventListener('click', () => {
+    modal.classList.remove('open');
+    document.body.style.overflow = '';
+  });
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+  });
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal.classList.contains('open')) {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
   });
 </script>
 
