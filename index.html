@@ -1,0 +1,1016 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Case Study · People Growth Ecosystem for a Digital Agency</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,300;9..144,400;9..144,500;9..144,600;9..144,700;9..144,900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --bg: #f7f4ef;
+    --ink: #1a1a2e;
+    --ink-soft: #44445c;
+    --muted: #7a7a8c;
+    --line: #e8e2d6;
+    --card: #ffffff;
+    --accent: #ff5a36;
+    --accent-soft: #ffe8e0;
+    --indigo: #3a3f8a;
+    --indigo-soft: #e9eaf8;
+    --lime: #d8ff4a;
+    --shadow: 0 1px 2px rgba(26,26,46,0.04), 0 12px 40px -12px rgba(26,26,46,0.12);
+    --radius: 18px;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    background: var(--bg);
+    color: var(--ink);
+    line-height: 1.55;
+    -webkit-font-smoothing: antialiased;
+    overflow-x: hidden;
+  }
+
+  .container {
+    max-width: 1600px;
+    margin: 0 auto;
+    padding: 0 80px;
+  }
+
+  /* ------ NAV ------ */
+  nav {
+    padding: 28px 0;
+    position: sticky;
+    top: 0;
+    background: rgba(255, 255, 255, 0.45);
+    backdrop-filter: blur(20px) saturate(1.2);
+    -webkit-backdrop-filter: blur(20px) saturate(1.2);
+    z-index: 100;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.5);
+    transition: border-color 0.3s ease, background 0.3s ease;
+  }
+  nav.scrolled {
+    background: rgba(255, 255, 255, 0.65);
+    border-bottom-color: rgba(0, 0, 0, 0.06);
+  }
+  nav .container { display: flex; justify-content: space-between; align-items: center; }
+  .brand {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 15px;
+    color: var(--ink-soft);
+    letter-spacing: -0.01em;
+  }
+  .brand strong {
+    font-weight: 600;
+    color: var(--ink);
+  }
+
+  /* ------ HERO ------ */
+  .hero {
+    display: flex;
+    align-items: flex-start;
+    position: relative;
+    padding: 80px 0 60px;
+  }
+  .hero .container { position: relative; z-index: 1; width: 100%; }
+
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 3fr 2fr;
+    gap: 64px;
+    align-items: center;
+  }
+  .hero-left {
+  }
+
+  h1 {
+    font-family: 'Fraunces', serif;
+    font-weight: 400;
+    font-size: clamp(42px, 6vw, 78px);
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    margin-bottom: 28px;
+    max-width: 100%;
+  }
+  h1 em {
+    font-style: italic;
+    font-weight: 300;
+    color: var(--accent);
+  }
+
+  .hero-lead {
+    font-size: 19px;
+    line-height: 1.55;
+    color: var(--ink-soft);
+    max-width: 100%;
+    font-weight: 400;
+  }
+
+  /* Case study sidebar card */
+  .hero-sidebar {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 36px 32px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  .hero-sidebar-label {
+    font-size: 12px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .hero-sidebar-title {
+    font-family: 'Fraunces', serif;
+    font-size: 34px;
+    font-weight: 500;
+    letter-spacing: -0.015em;
+    line-height: 1.15;
+    margin-bottom: 10px;
+  }
+  .hero-sidebar-title strong {
+    font-weight: 700;
+  }
+  .hero-sidebar-context {
+    font-size: 16px;
+    color: var(--muted);
+    margin-bottom: 16px;
+    line-height: 1.5;
+  }
+  .hero-sidebar-divider {
+    width: 100%;
+    height: 1px;
+    background: var(--line);
+    margin-bottom: 16px;
+  }
+
+  /* Capability list (stacked vertical) */
+  .capability-list {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+  .capability-list li {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+    font-size: 16px;
+    font-weight: 500;
+    color: var(--ink);
+    border-bottom: 1px solid var(--line);
+    letter-spacing: -0.01em;
+  }
+  .capability-list li:last-child { border-bottom: none; }
+  .capability-dot {
+    width: 5px; height: 5px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+
+  /* ------ SECTION HEADERS ------ */
+  .section-label {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin-bottom: 18px;
+  }
+  .section-label-line {
+    width: 28px; height: 2px;
+    background: var(--accent);
+  }
+  .section-label-text {
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.18em;
+    font-weight: 600;
+    color: var(--accent);
+  }
+
+  h2 {
+    font-family: 'Fraunces', serif;
+    font-weight: 500;
+    font-size: clamp(32px, 4vw, 48px);
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    margin-bottom: 56px;
+    max-width: 820px;
+  }
+  h2 em {
+    font-style: italic;
+    font-weight: 400;
+    color: var(--accent);
+  }
+
+  /* ------ STORY / WHAT WE DID ------ */
+  .story {
+    padding: 0;
+  }
+  .story > .container > .built-section,
+  .story > .container > .outcomes-section {
+    padding: 60px 0;
+  }
+
+  /* Starting Point */
+  .starting-point {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: var(--radius);
+    padding: 44px 48px;
+    margin-bottom: 72px;
+    position: relative;
+    max-width: 780px;
+  }
+  .starting-point::before {
+    content: '';
+    position: absolute;
+    left: 0; top: 0;
+    width: 3px; height: 100%;
+    background: var(--indigo);
+    border-radius: 3px 0 0 3px;
+  }
+  .starting-point-label {
+    display: inline-block;
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    color: var(--indigo);
+    margin-bottom: 14px;
+    padding: 5px 12px;
+    background: var(--indigo-soft);
+    border-radius: 100px;
+  }
+  .starting-point h3 {
+    font-family: 'Fraunces', serif;
+    font-size: 26px; font-weight: 500;
+    letter-spacing: -0.015em;
+    margin-bottom: 16px; line-height: 1.15;
+  }
+  .starting-point p {
+    font-size: 16px; color: var(--ink-soft);
+    line-height: 1.65; max-width: 640px;
+  }
+
+  /* What We Built - connected flow */
+  .built-section { margin-bottom: 80px; }
+  .built-section .section-label { margin-bottom: 14px; }
+  .built-section h2 { margin-bottom: 44px; }
+
+  .flow {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0;
+    max-width: 640px;
+  }
+  .flow-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 26px 30px;
+    width: 100%;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                border-color 0.35s ease;
+    position: relative;
+  }
+  .flow-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: transparent;
+  }
+  .flow-card-num {
+    font-family: 'Fraunces', serif;
+    font-size: 13px; font-weight: 600;
+    color: var(--muted);
+    letter-spacing: 0.04em;
+    margin-bottom: 6px;
+  }
+  .flow-card-title {
+    font-family: 'Fraunces', serif;
+    font-size: 20px; font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px; line-height: 1.2;
+  }
+  .flow-card-desc {
+    font-size: 14px; color: var(--ink-soft); line-height: 1.6;
+  }
+  .flow-connector {
+    width: 2px; height: 28px;
+    background: var(--line);
+    margin-left: 40px;
+    position: relative;
+  }
+  .flow-connector::after {
+    content: '';
+    position: absolute;
+    bottom: -3px; left: -3px;
+    width: 8px; height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  /* KEY OUTCOMES */
+  .outcomes-section { margin-bottom: 80px; }
+  .outcomes-section .section-label { margin-bottom: 14px; }
+  .outcomes-section h2 { margin-bottom: 44px; }
+
+  .outcomes-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  .outcome-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 28px;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .outcome-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+  .outcome-card h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 8px; line-height: 1.2;
+  }
+  .outcome-card p {
+    font-size: 14px; color: var(--ink-soft); line-height: 1.6;
+  }
+
+  /* Metrics strip */
+  .metrics-strip {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    margin-bottom: 0;
+  }
+  .metric-card {
+    background: var(--card);
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 28px 24px;
+    text-align: center;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .metric-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+  }
+  .metric-value {
+    font-family: 'Fraunces', serif;
+    font-size: 44px; font-weight: 400;
+    line-height: 1; letter-spacing: -0.03em;
+    color: var(--ink); margin-bottom: 8px;
+  }
+  .metric-value em {
+    font-style: italic;
+    color: var(--accent); font-weight: 300;
+  }
+  .metric-label {
+    font-size: 13px; color: var(--muted);
+    font-weight: 500; line-height: 1.4;
+  }
+  .metric-sub {
+    font-size: 12px; color: var(--muted);
+    font-weight: 400; margin-top: 4px;
+  }
+
+  /* ------ GROWTH HUB ------ */
+  .hub {
+    padding: 32px 0 80px;
+    background: var(--bg);
+  }
+
+  .hub-intro {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: end;
+    margin-bottom: 60px;
+  }
+  .hub-intro-right p {
+    font-size: 17px; color: var(--ink-soft); line-height: 1.65;
+  }
+
+  .layer { margin-bottom: 32px; }
+  .layer-header {
+    display: flex; align-items: center; gap: 16px;
+    margin-bottom: 22px; padding: 16px 24px;
+    background: var(--ink); color: white;
+    border-radius: 14px;
+  }
+  .layer-badge {
+    font-size: 11px; font-weight: 700;
+    text-transform: uppercase; letter-spacing: 0.14em;
+    padding: 6px 12px;
+    background: rgba(255,255,255,0.12);
+    border-radius: 100px; color: white;
+  }
+  .layer-title {
+    font-family: 'Fraunces', serif;
+    font-size: 18px; font-weight: 500;
+    letter-spacing: -0.01em;
+  }
+  .layer-dot {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .modules { display: grid; gap: 16px; }
+  .layer-1 .modules { grid-template-columns: repeat(3, 1fr); }
+  .layer-2 .modules { grid-template-columns: repeat(4, 1fr); }
+
+  .module {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    padding: 22px;
+    transition: all 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .module:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow);
+    border-color: var(--accent-soft);
+  }
+  .module-label {
+    font-size: 11px; text-transform: uppercase;
+    letter-spacing: 0.1em; color: var(--muted);
+    font-weight: 600; margin-bottom: 8px;
+  }
+  .module-title {
+    font-family: 'Fraunces', serif;
+    font-size: 19px; font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 12px; line-height: 1.2;
+  }
+  .module ul { list-style: none; }
+  .module li {
+    font-size: 13px; color: var(--ink-soft);
+    padding: 4px 0;
+    display: flex; align-items: center; gap: 8px;
+  }
+  .module li::before {
+    content: '';
+    width: 4px; height: 4px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex-shrink: 0;
+  }
+  .module-ai {
+    display: inline-flex; align-items: center; gap: 6px;
+    margin-top: 14px; padding: 6px 10px;
+    background: var(--ink); color: var(--lime);
+    border-radius: 100px;
+    font-size: 11px; font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+  .module-ai::before {
+    content: '⚡'; font-size: 11px;
+  }
+
+  /* ------ APP SCREENSHOTS ------ */
+  .screenshots {
+    padding: 32px 0 80px;
+    background: var(--bg);
+  }
+  .screenshots .section-label { margin-bottom: 14px; }
+  .screenshots h2 { margin-bottom: 44px; }
+
+  .screenshot-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  .screenshot-card {
+    background: white;
+    border: 1px solid var(--line);
+    border-radius: 14px;
+    overflow: hidden;
+    transition: transform 0.35s cubic-bezier(0.2, 0.8, 0.2, 1),
+                box-shadow 0.35s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .screenshot-card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow);
+  }
+  .screenshot-card img {
+    width: 100%;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    object-position: top left;
+    display: block;
+    border-bottom: 1px solid var(--line);
+  }
+  .screenshot-caption {
+    padding: 16px 20px;
+  }
+  .screenshot-caption h4 {
+    font-family: 'Fraunces', serif;
+    font-size: 16px; font-weight: 500;
+    letter-spacing: -0.01em;
+    margin-bottom: 4px;
+  }
+  .screenshot-caption p {
+    font-size: 13px; color: var(--muted); line-height: 1.4;
+  }
+
+  /* Full-width screenshots */
+  .screenshot-wide {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 24px;
+    margin-top: 24px;
+  }
+  .screenshot-wide .screenshot-card img {
+    width: 100%;
+    height: auto;
+    aspect-ratio: 16/10;
+    object-fit: cover;
+    object-position: top left;
+  }
+
+  /* ------ FOOTER ------ */
+  footer {
+    padding: 80px 0 60px;
+    background: var(--ink);
+    color: white;
+    position: relative;
+    overflow: hidden;
+  }
+  .footer-content { position: relative; z-index: 1; }
+  footer h2 { color: white; margin-bottom: 20px; }
+  footer h2 em { color: var(--lime); }
+  footer p {
+    color: rgba(255,255,255,0.7);
+    font-size: 17px; max-width: 580px;
+    margin-bottom: 36px;
+  }
+  .cta {
+    display: inline-flex; align-items: center; gap: 12px;
+    padding: 18px 32px;
+    background: var(--accent); color: white;
+    border-radius: 100px;
+    font-weight: 600; font-size: 15px;
+    text-decoration: none;
+    transition: all 0.3s ease;
+  }
+  .cta:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 16px 40px -12px rgba(255, 90, 54, 0.5);
+  }
+  .cta-arrow {
+    display: inline-block;
+    transition: transform 0.3s ease;
+  }
+  .cta:hover .cta-arrow { transform: translateX(4px); }
+  .footer-bottom {
+    margin-top: 80px; padding-top: 32px;
+    border-top: 1px solid rgba(255,255,255,0.1);
+    display: flex; justify-content: space-between;
+    align-items: center;
+    font-size: 13px; color: rgba(255,255,255,0.5);
+  }
+
+  /* ------ ANIMATIONS ------ */
+  .reveal {
+    opacity: 0; transform: translateY(24px);
+    transition: opacity 0.8s ease, transform 0.8s cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .reveal.in { opacity: 1; transform: translateY(0); }
+
+  /* ------ RESPONSIVE ------ */
+  @media (max-width: 900px) {
+    .hero { padding: 60px 0 80px; }
+    .hero-grid { grid-template-columns: 1fr; gap: 32px; }
+    .starting-point { padding: 28px 24px; }
+    .flow { max-width: 100%; }
+    .outcomes-grid { grid-template-columns: 1fr; }
+    .metrics-strip { grid-template-columns: repeat(2, 1fr); }
+    .hub-intro { grid-template-columns: 1fr; gap: 28px; }
+    .layer-1 .modules, .layer-2 .modules { grid-template-columns: 1fr 1fr; }
+    .screenshot-grid { grid-template-columns: 1fr; }
+    .screenshot-wide { grid-template-columns: 1fr; }
+    .footer-bottom { flex-direction: column; gap: 16px; text-align: center; }
+  }
+  @media (max-width: 560px) {
+    .container { padding: 0 20px; }
+    .metrics-strip { grid-template-columns: 1fr 1fr; }
+    .layer-1 .modules, .layer-2 .modules { grid-template-columns: 1fr; }
+    .layer-header { flex-wrap: wrap; }
+  }
+
+  /* ------ PRINT (2-page landscape PDF) ------ */
+  @media print {
+    @page {
+      size: landscape;
+      margin: 40px 48px;
+    }
+
+    * { -webkit-print-color-adjust: exact !important; print-color-adjust: exact !important; }
+
+    body { background: white; font-size: 11px; line-height: 1.45; }
+    .container { max-width: 100%; padding: 0; }
+
+    /* Kill animations */
+    .reveal { opacity: 1 !important; transform: none !important; transition: none !important; }
+
+    /* Nav becomes a simple header line */
+    nav {
+      position: static;
+      background: transparent !important;
+      backdrop-filter: none !important;
+      -webkit-backdrop-filter: none !important;
+      padding: 0 0 12px;
+      border-bottom: 1px solid #e0dcd4;
+      margin-bottom: 20px;
+    }
+    .brand { font-size: 11px; }
+
+    /* Hero compact */
+    .hero {
+      min-height: auto !important;
+      padding: 0 !important;
+      margin-bottom: 24px;
+    }
+    .hero-grid { gap: 32px; }
+    h1 { font-size: 36px !important; margin-bottom: 14px; }
+    .hero-lead { font-size: 13px !important; }
+    .hero-sidebar {
+      padding: 20px !important;
+      border-radius: 12px;
+    }
+    .hero-sidebar-title { font-size: 22px !important; }
+    .hero-sidebar-context { font-size: 12px !important; margin-bottom: 12px !important; }
+    .hero-sidebar-divider { margin-bottom: 10px !important; }
+
+    /* Cards section compact */
+    .story { padding: 0 !important; }
+    .built-section { padding: 0 !important; }
+    h2 { font-size: 22px !important; margin-bottom: 16px !important; }
+    .outcomes-grid { gap: 10px !important; }
+    .outcome-card {
+      padding: 14px 16px !important;
+      border-radius: 10px !important;
+    }
+    .outcome-card h4 { font-size: 13px !important; margin-bottom: 4px !important; }
+    .outcome-card p { font-size: 10.5px !important; line-height: 1.4 !important; }
+
+    /* Page break before Growth Hub */
+    .hub { page-break-before: always; padding: 0 !important; }
+    .hub-intro { gap: 28px !important; margin-bottom: 24px !important; }
+    .hub-intro h2 { font-size: 20px !important; }
+    .hub-intro-right p { font-size: 11px !important; }
+    .layer { margin-bottom: 16px !important; }
+    .layer-header {
+      padding: 10px 16px !important;
+      border-radius: 10px !important;
+      background: #1a1a2e !important;
+    }
+    .layer-badge { font-size: 9px !important; padding: 4px 8px !important; }
+    .layer-title { font-size: 14px !important; }
+    .module {
+      padding: 12px 14px !important;
+      border-radius: 10px !important;
+    }
+    .module-title { font-size: 14px !important; margin-bottom: 6px !important; }
+    .module-label { font-size: 9px !important; margin-bottom: 4px !important; }
+    .module li { font-size: 10px !important; padding: 2px 0 !important; }
+    .module-ai { font-size: 9px !important; margin-top: 8px !important; padding: 4px 8px !important; }
+    .modules { gap: 10px !important; }
+
+    /* Screenshots compact */
+    .screenshots {
+      padding: 20px 0 0 !important;
+      page-break-inside: avoid;
+    }
+    .screenshots h2 { margin-bottom: 12px !important; }
+    .screenshot-grid { gap: 10px !important; }
+    .screenshot-wide { gap: 10px !important; margin-top: 10px !important; }
+    .screenshot-card { border-radius: 10px !important; }
+    .screenshot-caption { padding: 8px 12px !important; }
+    .screenshot-caption h4 { font-size: 11px !important; }
+    .screenshot-caption p { font-size: 9px !important; }
+
+    /* Hide footer and non-essential elements */
+    footer { display: none !important; }
+    .section-label { margin-bottom: 10px !important; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <div class="container">
+    <div class="brand">
+      A case study by <strong>Polar Bear</strong>
+    </div>
+  </div>
+</nav>
+
+<section class="hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div class="hero-left">
+        <h1 class="reveal">
+          A <em>people growth ecosystem</em><br />
+          built for a digital agency<br />
+          that's scaling on talent.
+        </h1>
+        <p class="hero-lead reveal">
+          Through our approach and orchestration, leadership gained a shared, structured view of skills, growth, and potential across 35 people on the team.
+        </p>
+      </div>
+      <div class="hero-sidebar reveal">
+        <div class="hero-sidebar-title"><strong>Digital CX Agency</strong></div>
+        <div class="hero-sidebar-context">50 people&ensp; US · Brazil · India</div>
+        <div class="hero-sidebar-divider"></div>
+        <img src="case-study-images/world-map.png" alt="World map highlighting US, Brazil, and India" style="width:100%;height:auto;display:block;border-radius:8px;" />
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="story">
+  <div class="container">
+
+    <div class="built-section">
+      <h2 class="reveal">What we <em>did</em></h2>
+
+      <div class="outcomes-grid">
+        <div class="outcome-card reveal">
+          <h4>Built a career framework</h4>
+          <p>A behavior-driven framework aligned with the agency's strategy. Where it stands today and where it's heading.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>Created a transparent skills map</h4>
+          <p>Full visibility on skills coverage, growth areas, aspirations, and placement fit across the whole team.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>Ran end-to-end review cycle</h4>
+          <p>The full cycle: self-reflections, feedback collection, calibration committees, and final delivery to every employee.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>Built leadership capabilities</h4>
+          <p>Trained the team on self-reflection writing, feedback collection, and coached advisors on how to deliver it well.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>Created internal ownership</h4>
+          <p>Equipped one team member to own and run the next cycle independently. The process is now fully theirs.</p>
+        </div>
+      </div>
+
+      <h2 class="reveal" style="margin-top:56px;">Key <em>outcomes</em></h2>
+
+      <div class="outcomes-grid">
+        <div class="outcome-card reveal">
+          <h4>Full team picture</h4>
+          <p>Leadership gained visibility on skills, growth areas, and aspirations across every person.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>Patterns surfaced</h4>
+          <p>Recurring development needs emerged clearly, shaping how the agency will invest in its people going forward.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>Smarter placement decisions</h4>
+          <p>A few role mismatches were identified. Leadership now has the context to explore lateral moves that serve both person and team.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>Capability gaps made visible</h4>
+          <p>Skill gaps in the agency's offering became concrete, informing hiring and development priorities.</p>
+        </div>
+        <div class="outcome-card reveal">
+          <h4>A baseline for what comes next</h4>
+          <p>This cycle is the foundation. Every future review builds on it. They're not starting from scratch again.</p>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<section class="hub">
+  <div class="container">
+    <div class="hub-intro">
+      <div class="reveal">
+
+        <h2 style="margin-bottom:0;">AI-powered solution simplifying review cycle orchestration <em>to enable better human conversations.</em></h2>
+      </div>
+      <div class="hub-intro-right reveal">
+        <p>A two-layer solution that simplifies review cycle orchestration, from framework design to running the full cycle, so leaders spend less time managing the process and more time having the conversations that actually move people forward.</p>
+      </div>
+    </div>
+
+    <div class="layer layer-1 reveal">
+      <div class="layer-header">
+        <span class="layer-dot"></span>
+        <span class="layer-badge">Layer 1</span>
+        <span class="layer-title">Design: Foundation</span>
+      </div>
+      <div class="modules">
+        <div class="module">
+          <div class="module-label">Framework</div>
+          <div class="module-title">Framework builder</div>
+          <ul>
+            <li>Levels &amp; behaviors</li>
+            <li>Skills &amp; growth model</li>
+            <li>Dimensions</li>
+          </ul>
+          <span class="module-ai">Framework coach</span>
+        </div>
+        <div class="module">
+          <div class="module-label">Architecture</div>
+          <div class="module-title">Process design</div>
+          <ul>
+            <li>Custom cycle architecture</li>
+          </ul>
+        </div>
+        <div class="module">
+          <div class="module-label">Model</div>
+          <div class="module-title">Skills &amp; growth model</div>
+          <ul>
+            <li>Dimensions</li>
+            <li>Calibration rubric</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <div class="layer layer-2 reveal">
+      <div class="layer-header">
+        <span class="layer-dot"></span>
+        <span class="layer-badge">Layer 2</span>
+        <span class="layer-title">Run: Core modules</span>
+      </div>
+      <div class="modules">
+        <div class="module">
+          <div class="module-label">Participant</div>
+          <div class="module-title">Self-reflection</div>
+          <ul>
+            <li>Competency self-assess</li>
+            <li>Exposure list</li>
+            <li>360° nominations</li>
+          </ul>
+          <span class="module-ai">Reflection coach</span>
+        </div>
+        <div class="module">
+          <div class="module-label">Advisor</div>
+          <div class="module-title">Case preparation</div>
+          <ul>
+            <li>Evidence synthesis</li>
+            <li>Meeting booking</li>
+            <li>Scheduling &amp; calendar</li>
+          </ul>
+          <span class="module-ai">Case helper</span>
+        </div>
+        <div class="module">
+          <div class="module-label">Delivery</div>
+          <div class="module-title">Growth memo</div>
+          <ul>
+            <li>Review letter &amp; release</li>
+          </ul>
+          <span class="module-ai">Memo coach</span>
+        </div>
+        <div class="module">
+          <div class="module-label">Leadership</div>
+          <div class="module-title">Insights &amp; themes</div>
+          <ul>
+            <li>Org-wide analytics</li>
+            <li>Progress view</li>
+            <li>Completion analytics</li>
+            <li>Calibration room</li>
+            <li>Committee &amp; voting</li>
+          </ul>
+          <span class="module-ai">Theme analysis</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="screenshots">
+  <div class="container">
+
+    <h2 class="reveal">What it looks like <em>in practice.</em></h2>
+
+    <div class="screenshot-grid">
+      <div class="screenshot-card reveal">
+        <img src="case-study-images/image1.png" alt="Completion Funnel showing progress view" />
+        <div class="screenshot-caption">
+          <h4>Progress view</h4>
+          <p>Completion funnel across the growth journey</p>
+        </div>
+      </div>
+      <div class="screenshot-card reveal">
+        <img src="case-study-images/image5.png" alt="Self-reflection coach showing Socrates AI" />
+        <div class="screenshot-caption">
+          <h4>Self-reflection coach</h4>
+          <p>AI-powered Socratic questioning during self-reflection</p>
+        </div>
+      </div>
+      <div class="screenshot-card reveal">
+        <img src="case-study-images/growth-hub.png" alt="Growth Hub dashboard" />
+        <div class="screenshot-caption">
+          <h4>Growth Hub</h4>
+          <p>Quick way to see all of your tasks and documents</p>
+        </div>
+      </div>
+      <div class="screenshot-card reveal">
+        <img src="case-study-images/image6.png" alt="Case preparation support" />
+        <div class="screenshot-caption">
+          <h4>Case preparation support</h4>
+          <p>Evidence synthesis from multiple feedback sources</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="container footer-content">
+
+    <h2 class="reveal">Want the same clarity <em>for your team?</em></h2>
+    <p class="reveal">You've built an agency people want to work at. We help you build the system that keeps it that way as you grow.</p>
+    <a href="#" class="cta reveal">
+      Start a conversation
+      <span class="cta-arrow">→</span>
+    </a>
+    <div class="footer-bottom">
+      <span>© 2026 · Polar Bear</span>
+    </div>
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.10.1/html2pdf.bundle.min.js"></script>
+<script>
+  // Nav scroll state
+  const nav = document.querySelector('nav');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 20);
+  }, { passive: true });
+
+  // Reveal on scroll
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add('in');
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+
+  document.querySelectorAll('.reveal').forEach((el, i) => {
+    el.style.transitionDelay = `${Math.min(i * 60, 400)}ms`;
+    observer.observe(el);
+  });
+
+  // PDF Download
+  document.getElementById('downloadPdf').addEventListener('click', function() {
+    const btn = this;
+    btn.textContent = 'Generating...';
+    btn.disabled = true;
+
+    // Make all reveals visible
+    document.querySelectorAll('.reveal').forEach(el => el.classList.add('in'));
+
+    // Hide button and footer for PDF
+    btn.style.display = 'none';
+    const footer = document.querySelector('footer');
+    if (footer) footer.style.display = 'none';
+
+    const opt = {
+      margin:       [8, 12, 8, 12],
+      filename:     'Polar-Bear-Case-Study.pdf',
+      image:        { type: 'jpeg', quality: 0.95 },
+      html2canvas:  { scale: 2, useCORS: true, logging: false },
+      jsPDF:        { unit: 'mm', format: 'a4', orientation: 'landscape' },
+      pagebreak:    { mode: ['css'], before: '.hub' }
+    };
+
+    html2pdf().set(opt).from(document.body).save().then(() => {
+      btn.textContent = 'Download PDF';
+      btn.disabled = false;
+      btn.style.display = '';
+      if (footer) footer.style.display = '';
+    });
+  });
+</script>
+
+</body>
+</html>
